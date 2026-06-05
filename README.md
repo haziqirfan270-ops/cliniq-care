@@ -80,6 +80,18 @@ cliniq-care/
    subset of the selected symptoms, then conflict resolution picks the most
    specific match and reports a confidence score.
 
+## Testing & validation
+
+The inference engine is validated against 28 automated test cases (one per
+diagnosis, plus conflict-resolution, safety-net, confidence and chatbot tests):
+
+```bash
+python -m pytest -q
+```
+
+The same cases are documented as a human-readable table in
+[VALIDATION.md](VALIDATION.md).
+
 ## Authors
 
 Original ISP543 group project, rebuilt and extended.
