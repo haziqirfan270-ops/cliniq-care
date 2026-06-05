@@ -14,3 +14,7 @@ __pycache__/
 .DS_Store
 .vscode/
 .idea/
+
+# Word documents & lock files (keep local, not in repo)
+*.docx
+~$*

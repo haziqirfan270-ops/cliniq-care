@@ -1,4 +1,4 @@
-# ClinIQ Care — Validation
+# ClinIQ Care - Validation
 
 This document records the validation of the ClinIQ Care inference engine against
 a set of representative test cases. Every case below is also encoded as an
@@ -44,7 +44,7 @@ Each case feeds a set of selected symptoms (and patient age where relevant) to
 
 The original rule base had overlapping rules (e.g. the malaria rule
 `F1+F4+F6` is a subset of the flu rule `F1+F4+F5+F6`). ClinIQ Care resolves
-this by **specificity** — the rule matching the most symptoms wins.
+this by **specificity** - the rule matching the most symptoms wins.
 
 | Symptoms | Competing rules | Expected winner | Pass |
 |----------|-----------------|-----------------|------|

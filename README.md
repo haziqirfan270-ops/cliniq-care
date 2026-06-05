@@ -1,9 +1,9 @@
-# ClinIQ Care — Common Illness Expert System
+# ClinIQ Care - Common Illness Expert System
 
 A web-based **rule-based expert system** that suggests possible common illnesses
 from a user's symptoms and recommends next steps (self-care, monitor, see a
 doctor, or seek urgent care). Built for the *Knowledge Based System (ISP543)*
-course and rebuilt here with a **Hugging Face–powered chatbot** on top of the
+course and rebuilt here with a **Hugging Face-powered chatbot** on top of the
 original rule engine.
 
 > ⚠️ ClinIQ Care provides general guidance only and is **not** a substitute for
@@ -11,16 +11,16 @@ original rule engine.
 
 ## Features
 
-- **Forward-chaining inference engine** over ~30 IF–THEN production rules
+- **Forward-chaining inference engine** over ~30 IF-THEN production rules
   (`rules.py`), covering fever, respiratory, throat, digestive, headache and
   skin/allergy conditions.
-- **Specificity-based conflict resolution** — when several rules match, the most
+- **Specificity-based conflict resolution** - when several rules match, the most
   specific one wins, with a transparent confidence score (an improvement over
   the original ambiguous rule base).
 - **Two ways to interact:**
-  1. **Guided mode** — login → patient info → pick a category → tick symptoms →
+  1. **Guided mode** - login → patient info → pick a category → tick symptoms →
      diagnosis (mirrors the original project flow).
-  2. **Chatbot mode** — describe symptoms in plain language; a Hugging Face
+  2. **Chatbot mode** - describe symptoms in plain language; a Hugging Face
      zero-shot model maps your text to known symptoms, then the rule engine
      diagnoses. Falls back to offline keyword matching if no token is set.
 - **Safety-net rules** for no symptoms, too many symptoms, and no match.
@@ -74,9 +74,9 @@ cliniq-care/
 
 ## How the expert system works
 
-1. **Facts** — each symptom or patient attribute is a fact (`F1` = fever, …).
-2. **Rules** — each rule is `IF <facts> THEN <diagnosis + advice + severity>`.
-3. **Inference** — forward chaining collects every rule whose conditions are a
+1. **Facts** - each symptom or patient attribute is a fact (`F1` = fever, ...).
+2. **Rules** - each rule is `IF <facts> THEN <diagnosis + advice + severity>`.
+3. **Inference** - forward chaining collects every rule whose conditions are a
    subset of the selected symptoms, then conflict resolution picks the most
    specific match and reports a confidence score.
 
