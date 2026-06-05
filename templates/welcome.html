@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Welcome - ClinIQ Care{% endblock %}
+{% block body %}
+<div class="hero">
+    <h1>ClinIQ Care</h1>
+    <p>A common-illness expert system. Tell us your symptoms and get instant,
+       rule-based health guidance - no account, no install.</p>
+    <a class="btn" href="{{ url_for('login') }}">Start Diagnosis</a>
+    <a class="btn ghost" href="{{ url_for('chat') }}">Try the Chatbot</a>
+</div>
+<p class="disclaimer">ClinIQ Care provides general guidance only and does not replace
+   professional medical advice.</p>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}{{ category }} Symptoms - ClinIQ Care{% endblock %}
+{% block body %}
+<div class="brand"><h1>ClinIQ Care</h1></div>
+<div class="card">
+    <h2>{{ category }} Symptoms</h2>
+    <p class="meta">Select all symptoms that apply, then diagnose.</p>
+    <form method="POST" action="{{ url_for('do_diagnose') }}">
+        <div class="checks">
+            {% for fid, label in items %}
+            <label class="check">
+                <input type="checkbox" name="symptoms" value="{{ fid }}">
+                <span>{{ label|capitalize }}</span>
+            </label>
+            {% endfor %}
+        </div>
+        <button class="btn block" type="submit">Diagnose</button>
+    </form>
+    <div class="actions">
+        <a class="btn ghost" href="{{ url_for('category') }}">Back to categories</a>
+    </div>
+</div>
+{% endblock %}

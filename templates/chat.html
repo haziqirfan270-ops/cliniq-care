@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Chatbot - ClinIQ Care{% endblock %}
+{% block body %}
+<div class="brand"><h1>ClinIQ Care</h1><div class="tag">Symptom Chatbot</div></div>
+<div class="card">
+    <h2>Describe how you feel</h2>
+    <p class="meta">Type your symptoms in plain language - e.g.
+       "I have a fever, headache and chills".</p>
+
+    <div class="chat-box" id="chatBox">
+        <div class="msg bot"><div class="bubble">Hi! Tell me your symptoms and I'll
+            suggest what it might be.</div></div>
+    </div>
+
+    <form class="chat-input" id="chatForm">
+        <input type="text" id="chatInput" placeholder="Type your symptoms..." autocomplete="off" required>
+        <button class="btn" type="submit">Send</button>
+    </form>
+
+    <div class="actions">
+        <a class="btn ghost" href="{{ url_for('category') }}">Use checkbox mode</a>
+        <a class="btn ghost" href="{{ url_for('welcome') }}">Home</a>
+    </div>
+</div>
+<p class="disclaimer">General guidance only - not a substitute for a doctor.</p>
+
+<script>
+const box = document.getElementById('chatBox');
+const form = document.getElementById('chatForm');
+const input = document.getElementById('chatInput');
+
+function addMsg(text, who) {
+    const wrap = document.createElement('div');
+    wrap.className = 'msg ' + who;
+    const bubble = document.createElement('div');
+    bubble.className = 'bubble';
+    bubble.textContent = text;
+    wrap.appendChild(bubble);
+    box.appendChild(wrap);
+    box.scrollTop = box.scrollHeight;
+    return bubble;
+}
+
+form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const text = input.value.trim();
+    if (!text) return;
+    addMsg(text, 'user');
+    input.value = '';
+    const thinking = addMsg('Thinking...', 'bot');
+    try {
+        const res = await fetch('{{ url_for("api_chat") }}', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({message: text})
+        });
+        const data = await res.json();
+        thinking.textContent = data.reply;
+    } catch (err) {
+        thinking.textContent = 'Sorry, something went wrong. Please try again.';
+    }
+});
+</script>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Diagnosis - ClinIQ Care{% endblock %}
+{% block body %}
+<div class="brand"><h1>ClinIQ Care</h1></div>
+<div class="card">
+    <div class="result-head">
+        <h2>{{ result.diagnosis }}</h2>
+        <span class="badge sev-{{ result.severity }}">{{ result.severity_label }}</span>
+        {% if result.confidence %}
+        <span class="badge sev-monitor">Confidence ~{{ result.confidence }}%</span>
+        {% endif %}
+    </div>
+
+    <p class="meta">
+        Patient: {{ name }}{% if age %}, age {{ age }}{% endif %}{% if gender %}, {{ gender }}{% endif %}
+    </p>
+
+    {% if result.matched_symptoms %}
+    <p><strong>Based on:</strong> {{ result.matched_symptoms | join(', ') }}</p>
+    {% endif %}
+
+    <p>{{ result.advice }}</p>
+
+    {% if result.fired_rule %}
+    <p class="meta">Inferred by rule #{{ result.fired_rule }}.</p>
+    {% endif %}
+
+    <div class="actions">
+        <a class="btn" href="{{ url_for('category') }}">Diagnose again</a>
+        <a class="btn ghost" href="{{ url_for('category') }}">Choose other category</a>
+        <a class="btn ghost" href="{{ url_for('welcome') }}">Logout</a>
+    </div>
+</div>
+<p class="disclaimer">This is general guidance only and does not replace a doctor's diagnosis.</p>
+{% endblock %}
