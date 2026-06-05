@@ -136,9 +136,9 @@ def reply_text(result):
                 "how you feel, e.g. \"I have a fever, headache and chills\".")
 
     lines = [f"I understood these symptoms: {', '.join(understood)}.",
-             f"\nMost likely: **{result['diagnosis']}** "
+             f"\nMost likely: {result['diagnosis']} "
              f"(confidence ~{result['confidence']}%).",
              f"\nRecommended: {result['severity_label']}.",
              f"\n{result['advice']}",
-             "\n\n_ClinIQ Care offers general guidance only and does not replace a doctor._"]
+             "\n\nNote: ClinIQ Care offers general guidance only and does not replace a doctor."]
     return "".join(lines)

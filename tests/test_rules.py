@@ -78,9 +78,13 @@ def test_no_matching_rule_safety_net():
     assert result["diagnosis"] == "No specific match"
 
 
-def test_confidence_is_full_for_exact_match():
-    result = diagnose(["F12", "F13", "F14"], age=30)
-    assert result["confidence"] == 100
+def test_confidence_scales_with_symptom_count():
+    """More matched symptoms -> higher confidence; one symptom stays modest."""
+    three = diagnose(["F12", "F13", "F14"], age=30)   # 3-symptom rule
+    one = diagnose(["F5"], age=30)                     # 1-symptom rule
+    assert three["confidence"] == 85
+    assert one["confidence"] == 50
+    assert one["confidence"] < three["confidence"]
 
 
 def test_chatbot_keyword_extraction():

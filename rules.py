@@ -225,8 +225,13 @@ def diagnose(selected_facts, age=None):
     best = matches[0]
 
     matched_symptoms = [FACTS[f] for f in best["if"] if f in FACTS]
-    # Confidence: how much of the selection the winning rule explains.
-    confidence = round(100 * len(best["if"]) / max(len(selected), len(best["if"])))
+    # Confidence reflects how well-supported the diagnosis is:
+    #   - more matched symptoms -> a more specific, more confident match
+    #   - extra unexplained symptoms the user selected lower it (noise)
+    n = len(best["if"])
+    base = {1: 50, 2: 70, 3: 85}.get(n, 95)
+    extra = len(selected) - n
+    confidence = max(40, base - extra * 10)
 
     return {
         "diagnosis": best["diagnosis"],

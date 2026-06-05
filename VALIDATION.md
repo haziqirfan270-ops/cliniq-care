@@ -60,9 +60,13 @@ this by **specificity** — the rule matching the most symptoms wins.
 
 ## 4. Confidence scoring
 
+Confidence scales with how many symptoms support the diagnosis, so a single
+symptom never reports false certainty.
+
 | Input | Matched rule | Confidence | Pass |
 |-------|--------------|-----------|------|
-| nausea, vomiting, diarrhea | #19 Food Poisoning | 100% | ✅ |
+| nausea, vomiting, diarrhea (3 symptoms) | #19 Food Poisoning | 85% | ✅ |
+| sore throat (1 symptom) | #15 Throat Infection | 50% | ✅ |
 
 ## 5. Chatbot symptom extraction
 
